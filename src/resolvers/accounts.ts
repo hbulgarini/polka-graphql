@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Query, Resolver, Arg, Ctx } from 'type-graphql';
+
 import AccountSchema from '../schema/accounts';
 import type { IContext } from '../context';
 
@@ -19,11 +20,13 @@ export class AccountResolver {
       nonce
     } = result;
 
-    // toBigInt() is prefered, but in the process to get the correct library for defyining type-graphql BigInt
+    console.log('free', free.toBigInt());
+
+    // toBigInt() is prefered, but in the process to get the correct library for defining type-graphql BigInt
     return {
       nonce: nonce.toString(),
       balance: {
-        free: free.toString(),
+        free: free.toBigInt(),
         reserved: reserved.toString(),
         miscFrozen: miscFrozen.toString(),
         feeFrozen: feeFrozen.toString()
